@@ -82,15 +82,15 @@ const updateProfile = async () => {
     switch (data.period) {
       case "total":
         if (totalHoursEl)
-        totalHoursEl.textContent = `${data.total_hours} hours`;
+        totalHoursEl.textContent = `${data.total_duration}`;
         break;
       case "last7days":
         if (last7DaysHoursEl)
-        last7DaysHoursEl.textContent = `${data.total_hours} hours`;
+        last7DaysHoursEl.textContent = `${data.total_duration}`;
         break;
       case "last30days":
         if (last30DaysHoursEl)
-        last30DaysHoursEl.textContent = `${data.total_hours} hours`;
+        last30DaysHoursEl.textContent = `${data.total_duration}`;
         break;
     }
   });
