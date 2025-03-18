@@ -42,21 +42,34 @@ const updateProfile = async () => {
   const totalHoursEl = document.querySelector("#totalHours");
   const last7DaysHoursEl = document.querySelector("#last7DaysHours");
   const last30DaysHoursEl = document.querySelector("#last30DaysHours");
+  const totalHoursMobileEl = document.querySelector("#totalHoursMobile");
+  const last7DaysHoursMobileEl = document.querySelector("#last7DaysHoursMobile");
+  const last30DaysHoursMobileEl = document.querySelector("#last30DaysHoursMobile");
   res.data.forEach((data: any) => {
     switch (data.period) {
       case "total":
         if (totalHoursEl)
         totalHoursEl.textContent = `${Math.round(data.total_duration / 3600 * 10) / 10}`;
+        if (totalHoursMobileEl)
+        totalHoursMobileEl.textContent = `${Math.round(data.total_duration / 3600 * 10) / 10}`;
         break;
       case "last_7_days":
         if (last7DaysHoursEl)
         last7DaysHoursEl.textContent = `${
           Math.round((data.total_duration / 3600) * 10) / 10
         }`;
+        if (last7DaysHoursMobileEl)
+        last7DaysHoursMobileEl.textContent = `${
+          Math.round((data.total_duration / 3600) * 10) / 10
+        }`;
         break;
       case "last_month":
         if (last30DaysHoursEl)
         last30DaysHoursEl.textContent = `${
+          Math.round((data.total_duration / 3600) * 10) / 10
+        }`;
+        if (last30DaysHoursMobileEl)
+        last30DaysHoursMobileEl.textContent = `${
           Math.round((data.total_duration / 3600) * 10) / 10
         }`;
         break;
