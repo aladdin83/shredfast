@@ -77,6 +77,10 @@ let trackerInterval: ReturnType<typeof setInterval> | null = null;
 
 window.addEventListener('load', () => {
   initializeSession();
+  const totalHoursEl = document.querySelector('#totalHours');
+  if (totalHoursEl) {
+    totalHoursEl.textContent = '10';
+  }
   const videoElements = document.querySelectorAll('video');
   videoElements.forEach((videoElement) => {
     videoElement.addEventListener('play', () => {
