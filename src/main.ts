@@ -72,14 +72,40 @@ const generateSessionId = (length: number) => {
   return result;
 };
 
+const updateProfile = async () => {
+  const res = await supabase.rpc('aggregate_user_activity', { memberid: getMemberStackToken().id })
+  if (res.error) return;
+  const totalHoursEl = document.querySelector("#totalHours");
+  const last7DaysHoursEl = document.querySelector("#last7DaysHours");
+  const last30DaysHoursEl = document.querySelector("#last30DaysHours");
+  res.data.forEach((data: any) => {
+    switch (data.period) {
+      case "total":
+        if (totalHoursEl)
+        totalHoursEl.textContent = `${data.total_hours} hours`;
+        break;
+      case "last7days":
+        if (last7DaysHoursEl)
+        last7DaysHoursEl.textContent = `${data.total_hours} hours`;
+        break;
+      case "last30days":
+        if (last30DaysHoursEl)
+        last30DaysHoursEl.textContent = `${data.total_hours} hours`;
+        break;
+    }
+  });
+
+
+}
+
 const INTERVAL_DURATION = 5;
 let trackerInterval: ReturnType<typeof setInterval> | null = null;
 
 window.addEventListener('load', () => {
   initializeSession();
-  const totalHoursEl = document.querySelector('#totalHours');
+  const totalHoursEl = document.querySelector("#totalHours");
   if (totalHoursEl) {
-    totalHoursEl.textContent = '10';
+    updateProfile();
   }
   const videoElements = document.querySelectorAll('video');
   videoElements.forEach((videoElement) => {
